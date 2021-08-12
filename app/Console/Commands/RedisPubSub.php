@@ -43,9 +43,7 @@ class RedisPubSub extends Command
     public function handle()
     {
 
-        $this->redis->subscribe([$this->channel],func($redis, $channel, $msg){
-            echo "Pattern: $pattern\n";
-            echo "Channel: $chan\n";
+        $this->redis->subscribe([$this->channel],function($redis, $channel, $msg){
             echo "Payload: $msg\n";
         });
     }
