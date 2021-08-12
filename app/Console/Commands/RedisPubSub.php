@@ -25,9 +25,14 @@ class RedisPubSub extends Command
      *
      * @return void
      */
+    protected $redis;
+    protected $channel;
     public function __construct()
     {
         parent::__construct();
+
+        $this->redis = new \redis('127.0.0.1',6379);
+        $this->channel = 'mypublish';
     }
 
     /**
@@ -37,6 +42,11 @@ class RedisPubSub extends Command
      */
     public function handle()
     {
-        //
+
+        $this->redis->subscribe([$this->channel],func($redis, $channel, $msg){
+            echo "Pattern: $pattern\n";
+            echo "Channel: $chan\n";
+            echo "Payload: $msg\n";
+        });
     }
 }
