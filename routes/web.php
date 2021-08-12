@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('index','Redis\RedisController@index');//redis
-Route::get('redis/pub','Redis\RedisController@publish');//redis
+Route::get('redis/{type}','Redis\RedisController@publish');//redis

@@ -14,12 +14,12 @@ class RedisController extends Controller
         $redis = new \redis();
         $redis->connect('127.0.0.1',6379);
         $this->redis = $redis;
-        $this->channel = "mypublish";
     }
 
-    public function publish(Request $request){
-        $msg = "消息推送";
-        $this->redis->publish($this->channel,$msg);
+    public function publish(Request $request,$type){
+        $msg = "消息推送:".$type."\n";
+        $channel = 'pub:'.$type;
+        $this->redis->publish($channel,$msg);
 
         return "发布成功";
     }
