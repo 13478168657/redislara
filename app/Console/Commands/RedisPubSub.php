@@ -42,8 +42,10 @@ class RedisPubSub extends Command
 
         $redis = new \redis();
         $redis->connect('127.0.0.1',6379);
-        $channel = 'mypublish';
-        $redis->subscribe([$channel],function($redis, $channel, $msg){
+
+        $redis->psubscribe(['pub:*'],function($redis, $pattern, $chan, $msg) {
+            echo "Pattern: $pattern\n";
+            echo "Channel: $chan\n";
             echo "Payload: $msg\n";
         });
     }
