@@ -40,7 +40,8 @@ class RedisPubSub extends Command
     public function handle()
     {
 
-        $redis = new \redis('127.0.0.1',6379);
+        $redis = new \redis();
+        $redis->connect('127.0.0.1',6379);
         $channel = 'mypublish';
         $redis->subscribe([$channel],function($redis, $channel, $msg){
             echo "Payload: $msg\n";
