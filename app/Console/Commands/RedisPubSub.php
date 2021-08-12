@@ -39,10 +39,9 @@ class RedisPubSub extends Command
      */
     public function handle()
     {
-
+        ini_set('max_execution_time', '0');
         $redis = new \redis();
         $redis->pconnect('127.0.0.1',6379);//pconnect，连接一个redis实例或重复使用已经建立的连接，没有时间限制，除非将进程强制关闭
-
         $redis->psubscribe(['pub:*'],function($redis, $pattern, $chan, $msg) {
             echo "Pattern: $pattern\n";
             echo "Channel: $chan\n";
