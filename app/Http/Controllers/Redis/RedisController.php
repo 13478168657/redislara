@@ -19,8 +19,8 @@ class RedisController extends Controller
     public function publish(Request $request,$type){
         $msg = "消息推送:".$type."\n";
         $channel = 'pub:'.$type;
-        $this->redis->publish($channel,$msg);
-
+        $res = $this->redis->publish($channel,$msg);
+        echo $res."\n";
         return "发布成功";
     }
 }
