@@ -11,7 +11,9 @@ class RedisController extends Controller
     protected $channel;
     public function __construct(){
 
-        $this->redis = new \redis('127.0.0.1',6379);
+        $redis = new \redis();
+        $redis->connect('127.0.0.1',6379);
+        $this->redis = $redis;
         $this->channel = "mypublish";
     }
 
